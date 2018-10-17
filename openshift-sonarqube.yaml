@@ -1,21 +1,21 @@
 ### Service
 apiVersion: v1
-  kind: Service
-  metadata:
-    name: sonarqube
-    labels:
-      app: sonarqube
-  spec:
-    ports:
-    - name: sonarqube
-      port: 9000
-      protocol: TCP
-      targetPort: 9000
-    selector:
-      app: sonarqube
-      deploymentconfig: sonarqube
-    sessionAffinity: None
-    type: ClusterIP
+kind: Service
+metadata:
+  name: sonarqube
+  labels:
+    app: sonarqube
+spec:
+  ports:
+  - name: sonarqube
+    port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: sonarqube
+    deploymentconfig: sonarqube
+  sessionAffinity: None
+  type: ClusterIP
 ---
 ### Route
 apiVersion: v1
@@ -127,7 +127,7 @@ spec:
     storage: 1Gi
   nfs:
     path: /var/exports/sonarqube
-    server: 10.18.20.14 
+    server: mpt-nfs01.mpt.mp.br 
   persistentVolumeReclaimPolicy: Recycle
 ---
 ### Presitent volume claim
