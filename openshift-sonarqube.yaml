@@ -107,37 +107,3 @@ spec:
       restartPolicy: Always
       securityContext: {}
       terminationGracePeriodSeconds: 30
-      volumes:
-      - name: sonarqube-data
-        persistentVolumeClaim:
-          claimName: sonarqube-data
----
-### Presitent volume
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: sonarqube
-  labels:
-    type: local
-    pattern: sonarqube
-spec:
-  accessModes:
-  - ReadWriteOnce
-  capacity:
-    storage: 1Gi
-  nfs:
-    path: /var/exports/sonarqube
-    server: mpt-nfs01.mpt.mp.br 
-  persistentVolumeReclaimPolicy: Recycle
----
-### Presitent volume claim
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: sonarqube-data
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
